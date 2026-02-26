@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/IBM/sarama"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -18,12 +19,10 @@ import (
 // 全局单例
 var G_logSink *LogSink
 
-// LogSink负责存储日志
+// LogSink 负责将日志发送到 Kafka (重构版)
 type LogSink struct {
-	client         *mongo.Client       //MongoDB 客户端连接
-	collection     *mongo.Collection   //MongoDB 的某一个集合（表），相当于 MySQL 里的一张表
-	logChan        chan *common.JobLog //把日志丢进 channel，由后台goroutine统一写
-	autoCommitChan chan *common.JobLog //存放需要 自动落库 / 批量提交 的日志
+	producer sarama.AsyncProducer // 改为：Kafka 异步生产者
+	topic    string               // Kafka Topic 名字
 }
 
 // InitLogSink 初始化日志汇聚点
