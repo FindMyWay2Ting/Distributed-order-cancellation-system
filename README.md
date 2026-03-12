@@ -59,7 +59,7 @@ go run rag_ingester.go
 curl -X POST http://localhost:8877/trade/create_bug_order
 ```
 ## 📂 项目目录结构
-​```text
+
 
 ├── mock_server/           # 业务逻辑中心：包含订单创建、Outbox Relay 线程及本地消息表处理 
 
@@ -73,4 +73,4 @@ curl -X POST http://localhost:8877/trade/create_bug_order
 ├── Dockerfile             # 容器化构建定义，支持多阶段构建以优化镜像体积
 
 └── docker-compose.yaml    # 全量服务编排：一键启动 MySQL, Redis, Kafka, Qdrant 及业务组件
-​```
+
