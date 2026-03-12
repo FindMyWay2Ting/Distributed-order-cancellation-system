@@ -5,17 +5,17 @@
 系统由以下五个核心模块组成：
 
 
-### Mock Business Server: 业务入口，利用 Outbox Pattern (本地消息表) 保证订单数据与 Kafka 消息的事务一致性 。
+#### Mock Business Server: 业务入口，利用 Outbox Pattern (本地消息表) 保证订单数据与 Kafka 消息的事务一致性 。
 
 
-### Timer Service: 基于 Redis ZSet 实现的分布式延迟队列，负责千万级订单的超时扫描与调度 。
+#### Timer Service: 基于 Redis ZSet 实现的分布式延迟队列，负责千万级订单的超时扫描与调度 。
 
-### Worker Node: 分布式消费者，执行订单状态翻转与库存回滚。具备 3次本地重试 与 死信队列 (DLQ) 容错机制。
+#### Worker Node: 分布式消费者，执行订单状态翻转与库存回滚。具备 3次本地重试 与 死信队列 (DLQ) 容错机制。
 
 
-### AI-SRE Service: 智能运维中枢。监听死信队列，结合 Qdrant 向量数据库 检索 SOP 手册，驱动大模型执行自主排障 。
+#### AI-SRE Service: 智能运维中枢。监听死信队列，结合 Qdrant 向量数据库 检索 SOP 手册，驱动大模型执行自主排障 。
 
-### RAG Ingester: 自动化知识入库工具，将运维 SOP 文本向量化并持久化至 Qdrant。
+#### RAG Ingester: 自动化知识入库工具，将运维 SOP 文本向量化并持久化至 Qdrant。
 
 ## 🛠️ 技术栈
 语言: Go (Gin, GORM, Sarama)
